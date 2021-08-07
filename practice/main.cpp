@@ -40,7 +40,9 @@ public:
             duyetMang->next = temp;
         }
 
-        duyetMang = nullptr;        
+        /* can't free ptr */
+        // delete duyetMang;
+        // duyetMang = nullptr;        
     }
 
     void addStudent (Node temp) {
@@ -55,7 +57,9 @@ public:
             duyetMang->next = &temp;
         }
         
-        duyetMang = nullptr;
+        /* free ptr */
+        // delete duyetMang;
+        // duyetMang = nullptr;
     }
 
     void addStudent (SinhVien sv) {
@@ -75,7 +79,8 @@ public:
         }
 
          /* free ptr */
-        duyetMang = nullptr;
+        // delete duyetMang;
+        // duyetMang = nullptr;
     }
 
 
@@ -98,7 +103,8 @@ public:
         }
 
         /* free ptr */
-        duyetMang = nullptr;     
+        // delete duyetMang;
+        // duyetMang = nullptr;     
     }
 
 
@@ -109,6 +115,7 @@ public:
             cout<< "Khong co thong tin nao.";
 
             /* free ptr */
+            delete duyetMang;
             duyetMang = nullptr;
             return;
         }
@@ -121,6 +128,7 @@ public:
         }
 
         /* free ptr */
+        delete duyetMang;
         duyetMang = nullptr;
     }
 
@@ -141,6 +149,7 @@ public:
         }
 
         /* free ptr */
+        delete duyetMang;
         duyetMang = nullptr;
         return result;
     }
@@ -162,6 +171,7 @@ public:
         }
 
         /* free ptr */
+        delete duyetMang;
         duyetMang = nullptr;
         return result;
     }
@@ -183,6 +193,7 @@ public:
         }
 
         /* free ptr */
+        delete duyetMang;
         duyetMang = nullptr;
         return result;
     }
@@ -208,6 +219,7 @@ public:
         }
         
         /* free */
+        delete duyetMang;
         duyetMang = nullptr;
 
         return result;
@@ -216,7 +228,10 @@ public:
     /* delete Student by ID - MSV */
     void deleteStudent (char *_MSV) {
         Node *duyetMang = head;
-        if (duyetMang == nullptr) { duyetMang = nullptr; return;}
+
+        if (duyetMang == nullptr) {
+            return;
+        }
 
         /* xoa phan tu dau. */
         if (duyetMang->value.getMSV() == _MSV) {
@@ -225,6 +240,7 @@ public:
             duyetMang->next = nullptr;
 
             /* Del ptr */
+            delete duyetMang;
             duyetMang = nullptr;
             return;            
         }
@@ -248,6 +264,7 @@ public:
         cout << "khong tim thay phan tu tu de xoa"<< endl;
 
         /* free ptr */
+        delete duyetMang;
         duyetMang = nullptr;
     }
 
@@ -259,6 +276,7 @@ public:
                 duyetMang->value.setMSV(newMSV);
 
                 /* del ptr then and the method */
+                delete duyetMang;
                 duyetMang = nullptr;
                 return;
             }
@@ -268,6 +286,7 @@ public:
         cout << "khong tim thay SV" << endl;
         
         /* del ptr */
+        delete duyetMang;
         duyetMang = nullptr;
     }
 
@@ -279,6 +298,7 @@ public:
                 duyetMang->value.setTen(newName);
 
                 /* free ptr */
+                delete duyetMang;
                 duyetMang = nullptr;
                 return;
             }
@@ -287,6 +307,7 @@ public:
         cout << "khong tim thay SV" << endl;
 
         /*free ptr */
+        delete duyetMang;
         duyetMang = nullptr;
     }
 
@@ -313,6 +334,7 @@ public:
             i = i->next;
         }
 
+        delete i,j;
         i = nullptr;
         j = nullptr;
     }
@@ -332,6 +354,7 @@ LinkList::~LinkList()
     while ( head != nullptr) {
         Node *temp = head;
         head = head->next;
+
         delete temp;
         temp = nullptr;
     }
@@ -339,71 +362,16 @@ LinkList::~LinkList()
 
 
 int main () {
+    
+
     LinkList ll1;
-
-    /* add 3 students. */
-    /*
     SinhVien *sv1 = new SinhVien("DTC01", "An Nguyen", 19, 6.7f);
-    SinhVien *sv2 = new SinhVien("DTC02", "Nguyen Thanh", 20, 6.4f);
-    SinhVien *sv3 = new SinhVien("DTC03", "An Nguyen Thanh", 19, 7.1f);
-    SinhVien sv4;
-    sv4.Nhap() ;
+    ll1.addStudent(*sv1);
+    ll1.addStudent();
 
-    ll1.addStudent(sv1);
-    ll1.addStudent(sv2);
-    ll1.addStudent(sv3);
-    ll1.addStudent(sv4);
-    */
-
-
-    /* add 4 students */
-    /* */
-    ll1.addStudent("DTC01", "An Nguyen", 19, 6.7f);
-    ll1.addStudent("DTC02", "Nguyen Thanh", 20, 6.4f);
-    ll1.addStudent("DTC03", "An Nguyen Thanh", 19, 7.1f);
-    ll1.addStudent("DTC04", "An Nguyen Thanh", 19, 6.4f);
-    
-
-    
-    
-
-    /* find students have 19 years old, find by DTB, Ten, Tuoi. */
-    /*
-    ll1.findStudent(19).printAllStudents();
-    ll1.findStudent(6.1f).printAllStudents();
-    ll1.findStudent(6.4f).printAllStudents();
-    ll1.findStudent("DTC01").printAllStudents();*//*
-    ll1.findStudentByName("An Nguyen Thanh").printAllStudents();
-    */
-    
-    
-    /* Del a student. */
-    /*
     ll1.deleteStudent("DTC01");
     ll1.printAllStudents();
-    */
 
-    /* change value. */
-    /*
-    ll1.changeStudentName("DT01", "Thay ten");
-    ll1.printAllStudents();
-    */
-
-    /* sort */
-    /*
-    ll1.addStudent("DTC01", "1", 19, 6.7f);
-    ll1.addStudent("DTC02", "3", 20, 6.4f);
-    ll1.addStudent("DTC03", "2", 19, 7.1f);
-    ll1.addStudent("DTC04", "0", 19, 6.4f);
-    */
-
-    /* sort by name 
-    ll1.sortByName();
-    ll1.printAllStudents();
-    */
-
-    /* print all. */
-    /**/
-    ll1.printAllStudents();
+    ll1.~LinkList();
     return 0;
 }
