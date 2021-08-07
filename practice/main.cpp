@@ -83,6 +83,12 @@ public:
         // duyetMang = nullptr;
     }
 
+    void addStudent ( int numberStudent) {
+        for ( int i = 0 ; i < numberStudent ; i ++) {
+            addStudent();
+            cin.ignore();
+        }
+    }
 
 // have to create sv first, cant use setvalue.
     void addStudent (char *_MSV, char *_ten, int _tuoi, float _DTB) {
@@ -182,7 +188,7 @@ public:
         Node *duyetMang = head;
 
         while(duyetMang != nullptr) {
-            if (duyetMang->value.getMSV() == _MSV) {
+            if (strcmp(duyetMang->value.getMSV(), _MSV) == 0) {
                 Node temp;
                 temp.value = duyetMang->value;
                 temp.next = nullptr;
@@ -204,23 +210,21 @@ public:
         Node *duyetMang = head;
 
         while(duyetMang != nullptr) {
-            if (duyetMang->value.getTen() == _name) {
+            if (strcmp(duyetMang->value.getTen(), _name) == 0) {
                 Node temp;
                 temp.value = duyetMang->value;
                 temp.next = nullptr;
 
                 result.addStudent(temp);
-
                 
             }
-            result.printAllStudents();
-            cout << endl << "end" << endl;
+            
             duyetMang= duyetMang->next;
         }
         
         /* free */
-        delete duyetMang;
-        duyetMang = nullptr;
+        // delete duyetMang;
+        // duyetMang = nullptr;
 
         return result;
     }
@@ -234,7 +238,7 @@ public:
         }
 
         /* xoa phan tu dau. */
-        if (duyetMang->value.getMSV() == _MSV) {
+        if (strcmp(duyetMang->value.getMSV() , _MSV)==0) {
             head = duyetMang->next;
             
             duyetMang->next = nullptr;
@@ -247,7 +251,7 @@ public:
         
         /* xoa phan tu khac head. */
         while (duyetMang != nullptr) {
-            if ((duyetMang->next)->value.getMSV() == _MSV){
+            if (strcmp((duyetMang->next)->value.getMSV(), _MSV) == 0){
                 
                 Node *del = duyetMang->next;
                 duyetMang->next = duyetMang->next->next;
@@ -272,7 +276,7 @@ public:
     void changeStudentInfor (char * oldMSV, char *newMSV) {
         Node *duyetMang = head;
         while (duyetMang != nullptr){
-            if (duyetMang->value.getMSV() == oldMSV ) {
+            if (strcmp(duyetMang->value.getMSV(), oldMSV ) == 0 ){
                 duyetMang->value.setMSV(newMSV);
 
                 /* del ptr then and the method */
@@ -294,12 +298,12 @@ public:
     void changeStudentName (char *_MSV, char *newName) {
         Node *duyetMang = head;
         while (duyetMang != nullptr) {
-            if (duyetMang->value.getMSV() == _MSV ) {
+            if (strcmp(duyetMang->value.getMSV(), _MSV) == 0 ) {
                 duyetMang->value.setTen(newName);
 
                 /* free ptr */
-                delete duyetMang;
-                duyetMang = nullptr;
+                // delete duyetMang;
+                // duyetMang = nullptr;
                 return;
             }
             duyetMang= duyetMang->next;
@@ -307,8 +311,8 @@ public:
         cout << "khong tim thay SV" << endl;
 
         /*free ptr */
-        delete duyetMang;
-        duyetMang = nullptr;
+        // delete duyetMang;
+        // duyetMang = nullptr;s
     }
 
     void sortByName () {
@@ -363,14 +367,117 @@ LinkList::~LinkList()
 
 int main () {
     
-
     LinkList ll1;
-    SinhVien *sv1 = new SinhVien("DTC01", "An Nguyen", 19, 6.7f);
-    ll1.addStudent(*sv1);
-    ll1.addStudent();
+ 
+    int luaChon = -1;
+    
+    do {
+    printf ("1. nhap SV.\n 2. sua ten sinh vien. \n 3. xoa sinh vien theo MSV\n 4. tim kiem theo ten\n 5. sap xep theo ten\n 6. in danh sach.\n 0. thoat\n\n");
+    cin >> luaChon;
 
-    ll1.deleteStudent("DTC01");
-    ll1.printAllStudents();
+        // nhap sv 
+        if (luaChon == 1) {
+            system("clear");
+            int number = 0;
+            cout << "nhap so sinh vien muon them vao: "<< endl;
+            cin >> number;
+
+            cin.ignore();
+            ll1.addStudent(number);
+        }
+
+         // sua ten SV 
+        if (luaChon == 2) {
+            system("clear");
+
+            cout << "---sua ten sinh vien----" << endl;
+            
+            char _MSV[30];
+            char _Ten[30];
+            char pause = ' ';
+
+            cout <<"nhap MSV muon sua: ";
+            cin.ignore();
+            scanf ("%[A-Za-z0-9]",_MSV);
+            cin.ignore();
+            cout << "nhap ten moi: ";
+            scanf ("%[A-Za-z ]", _Ten);
+
+            cout <<"." <<_Ten << "." << _MSV<<"." << endl;
+
+            ll1.changeStudentName(_MSV, _Ten);
+
+            cout << endl << "doi ten thanh cong";
+            cout << endl << "an phim bt ky."<<endl;
+
+            ll1.printAllStudents();
+            cin>> pause;
+            
+        }
+
+        //  xoa SV theo MSV 
+        if (luaChon == 3) {
+            system("clear");
+
+            cout << "---xoa sinh vien----" << endl;
+            
+            char _MSV[30];
+            char pause = 'a';
+
+            cout <<"nhap MSV muon xoa: ";
+            cin.ignore();
+            scanf ("%[A-Za-z0-9]",_MSV);
+
+            ll1.deleteStudent(_MSV);
+            cout << "da xoa."<< endl << "an Enter";
+            cin >> pause;
+        }
+        
+        // tiem kiem 
+        if (luaChon == 4) {
+            system("clear");
+
+            cout << "---Tim kiem sinh vien bang ten---" << endl;
+
+            cin.ignore();
+            char _ten[30];
+            char pause = ' ';
+
+            cout <<"nhap Ten Sinh Vien muon tim: ";
+            scanf ("%[A-Za-z ]",_ten);
+            cout << "Ten: " <<"." <<_ten << ".";
+
+            system("clear");
+            cout << "Ket qua tim kiem:"<<endl;
+            ll1.findStudentByName(_ten).printAllStudents();
+
+            cout <<endl<< "An enter";
+            cin>> pause;
+        }
+
+        if (luaChon == 5) {
+            system("clear");
+            
+            char pause = ' ';
+            ll1.sortByName();
+            cout <<" ket qua sau khi sap xep:" << endl;
+            
+            ll1.printAllStudents();
+
+            cout <<endl<< "An enter";
+            cin>> pause;
+        }
+        if (luaChon == 6 ) {
+            system("clear");
+
+            char pause = '0';
+            ll1.printAllStudents();
+            cout <<endl<< "An enter";
+            cin>> pause;
+        }
+    }
+    while (luaChon != 0);
+    /**/
 
     ll1.~LinkList();
     return 0;
