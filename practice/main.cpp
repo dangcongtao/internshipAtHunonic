@@ -20,51 +20,62 @@ public:
 
     // method
     void addStudent () {
-        Node *temp = new Node();
-        Node *duyetmang;
-        temp->value.Nhap();
+        Node *temp = new Node;
+        Node *duyetMang;
+        SinhVien sv;
+        sv.Nhap();
+        // sv.print(); ok
+
+        temp->value = sv; 
         temp->next = nullptr;
+        // temp.value.print(); ok
 
         if ( head ==nullptr) {
             head = temp;
         }else {
-            duyetmang = this->head;
-            while (duyetmang->next != nullptr) {
-                duyetmang = duyetmang->next;
+            duyetMang = head;
+            while (duyetMang->next != nullptr) {
+                duyetMang = duyetMang->next;
             }
-            duyetmang->next = temp;
+            duyetMang->next = temp;
+        }
+
+        duyetMang = nullptr;        
+    }
+
+    void addStudent (Node temp) {
+        Node *duyetMang;
+        if ( head ==nullptr) {
+            head = &temp;
+        }else {
+            duyetMang = head;
+            while (duyetMang->next != nullptr) {
+                duyetMang = duyetMang->next;
+            }
+            duyetMang->next = &temp;
         }
         
+        duyetMang = nullptr;
     }
 
-    void addStudent (Node *temp) {
-        Node *duyetmang;
-        if ( head ==nullptr) {
-            head = temp;
-        }else {
-            duyetmang = this->head;
-            while (duyetmang->next != nullptr) {
-                duyetmang = duyetmang->next;
-            }
-            duyetmang->next = temp;
-        }
-    }
-
-    void addStudent (SinhVien *sv) {
-        Node *temp = new Node();
-        Node *duyetmang;
-        temp->value = *sv;
+    void addStudent (SinhVien sv) {
+        Node *temp = new Node;
+        Node *duyetMang;
+        temp->value = sv;
         temp->next = nullptr;
 
         if ( head ==nullptr) {
             head = temp;
         }else {
-            duyetmang = this->head;
-            while (duyetmang->next != nullptr) {
-                duyetmang = duyetmang->next;
+            duyetMang = this->head;
+            while (duyetMang->next != nullptr) {
+                duyetMang = duyetMang->next;
             }
-            duyetmang->next = temp;
+            duyetMang->next = temp;
         }
+
+         /* free ptr */
+        duyetMang = nullptr;
     }
 
 
@@ -75,164 +86,208 @@ public:
         temp->value = *sv;
         temp->next = nullptr;
         
-        Node *duyetmang;
+        Node *duyetMang;
         if ( head ==nullptr) {
             head = temp;
         }else {
-            duyetmang = this->head;
-            while (duyetmang->next != nullptr) {
-                duyetmang = duyetmang->next;
+            duyetMang = this->head;
+            while (duyetMang->next != nullptr) {
+                duyetMang = duyetMang->next;
             }
-            duyetmang->next = temp;
-        }        
+            duyetMang->next = temp;
+        }
+
+        /* free ptr */
+        duyetMang = nullptr;     
     }
 
 
     void printAllStudents() {
-        Node *duyetmang = head;
+        Node *duyetMang = head;
 
-        if (duyetmang == nullptr) {
+        if (duyetMang == nullptr) {
             cout<< "Khong co thong tin nao.";
+
+            /* free ptr */
+            duyetMang = nullptr;
             return;
         }
 
-        while (duyetmang != nullptr) {
+        while (duyetMang != nullptr) {
             cout << endl;
-            duyetmang->value.print();
+            duyetMang->value.print();
 
-            duyetmang = duyetmang->next;            
+            duyetMang = duyetMang->next;            
         }
+
+        /* free ptr */
+        duyetMang = nullptr;
     }
 
     // find by tuoi-age.
     LinkList findStudent (int tuoi) {
         LinkList result;
-        Node *duyetmang = head;
+        Node *duyetMang = head;
 
-        while(duyetmang != nullptr) {
-            if (duyetmang->value.getTuoi() == tuoi) {
-                Node *temp = new Node;
-                temp->value = duyetmang->value;
-                temp->next = nullptr;
+        while(duyetMang != nullptr) {
+            if (duyetMang->value.getTuoi() == tuoi) {
+                Node temp;
+                temp.value = duyetMang->value;
+                temp.next = nullptr;
 
                 result.addStudent(temp);
             }
-            duyetmang= duyetmang->next;
+            duyetMang= duyetMang->next;
         }
+
+        /* free ptr */
+        duyetMang = nullptr;
         return result;
     }
 
     // find by DTB
     LinkList findStudent (float _DTB) {
         LinkList result;
-        Node *duyetmang = head;
+        Node *duyetMang = head;
 
-        while(duyetmang != nullptr) {
-            if (duyetmang->value.getDTB() == _DTB) {
-                Node *temp = new Node;
-                temp->value = duyetmang->value;
-                temp->next = nullptr;
+        while(duyetMang != nullptr) {
+            if (duyetMang->value.getDTB() == _DTB) {
+                Node temp;
+                temp.value = duyetMang->value;
+                temp.next = nullptr;
 
                 result.addStudent(temp);
             }
-            duyetmang= duyetmang->next;
+            duyetMang= duyetMang->next;
         }
+
+        /* free ptr */
+        duyetMang = nullptr;
         return result;
     }
     
-    // find by ID - MSV.
+    /* find by ID - MSV. */
     LinkList findStudent ( char *_MSV) {
         LinkList result;
-        Node *duyetmang = head;
+        Node *duyetMang = head;
 
-        while(duyetmang != nullptr) {
-            if (duyetmang->value.getMSV() == _MSV) {
-                Node *temp = new Node;
-                temp->value = duyetmang->value;
-                temp->next = nullptr;
+        while(duyetMang != nullptr) {
+            if (duyetMang->value.getMSV() == _MSV) {
+                Node temp;
+                temp.value = duyetMang->value;
+                temp.next = nullptr;
 
                 result.addStudent(temp);
             }
-            duyetmang= duyetmang->next;
+            duyetMang= duyetMang->next;
         }
+
+        /* free ptr */
+        duyetMang = nullptr;
         return result;
     }
     
-    // find by name.
+    /* find by name. */
     LinkList findStudentByName (char * _name)  {
         LinkList result;
-        Node *duyetmang = head;
+        Node *duyetMang = head;
 
-        while(duyetmang != nullptr) {
-            if (duyetmang->value.getTen() == _name) {
-                Node *temp = new Node;
-                temp->value = duyetmang->value;
-                temp->next = nullptr;
+        while(duyetMang != nullptr) {
+            if (duyetMang->value.getTen() == _name) {
+                Node temp;
+                temp.value = duyetMang->value;
+                temp.next = nullptr;
 
                 result.addStudent(temp);
+
+                
             }
-            duyetmang= duyetmang->next;
+            result.printAllStudents();
+            cout << endl << "end" << endl;
+            duyetMang= duyetMang->next;
         }
+        
+        /* free */
+        duyetMang = nullptr;
+
         return result;
     }
 
-    // delete Student by ID - MSV
+    /* delete Student by ID - MSV */
     void deleteStudent (char *_MSV) {
-        Node *duyetmang = head;
-        if (duyetmang == nullptr) return;
+        Node *duyetMang = head;
+        if (duyetMang == nullptr) { duyetMang = nullptr; return;}
 
-        // xoa phan tu dau.
-        if (duyetmang->value.getMSV() == _MSV) {
-            head = duyetmang->next;
+        /* xoa phan tu dau. */
+        if (duyetMang->value.getMSV() == _MSV) {
+            head = duyetMang->next;
             
-            duyetmang->next = nullptr;
-            delete duyetmang;
-            return;
-            // delete del;
+            duyetMang->next = nullptr;
+
+            /* Del ptr */
+            duyetMang = nullptr;
+            return;            
         }
         
-        // xoa phan tu khac head.
-        while (duyetmang != nullptr) {
-            if ((duyetmang->next)->value.getMSV() == _MSV){
+        /* xoa phan tu khac head. */
+        while (duyetMang != nullptr) {
+            if ((duyetMang->next)->value.getMSV() == _MSV){
                 
-                Node *del = duyetmang->next;
-                duyetmang->next = duyetmang->next->next;
+                Node *del = duyetMang->next;
+                duyetMang->next = duyetMang->next->next;
                 del->next = nullptr;
 
-                delete del;                
+                /* del ptr*/
+                delete del;
+                del = nullptr;           
             }else {
-                duyetmang = duyetmang->next;
+                duyetMang = duyetMang->next;
             }
             
         }
         cout << "khong tim thay phan tu tu de xoa"<< endl;
+
+        /* free ptr */
+        duyetMang = nullptr;
     }
 
-    // change MSV-ID.
+    /* change MSV-ID. */
     void changeStudentInfor (char * oldMSV, char *newMSV) {
-        Node *duyetmang = head;
-        while (duyetmang != nullptr){
-            if (duyetmang->value.getMSV() == oldMSV ) {
-                duyetmang->value.setMSV(newMSV);
+        Node *duyetMang = head;
+        while (duyetMang != nullptr){
+            if (duyetMang->value.getMSV() == oldMSV ) {
+                duyetMang->value.setMSV(newMSV);
+
+                /* del ptr then and the method */
+                duyetMang = nullptr;
                 return;
             }
-            duyetmang = duyetmang->next;
+            duyetMang = duyetMang->next;
         }
 
         cout << "khong tim thay SV" << endl;
+        
+        /* del ptr */
+        duyetMang = nullptr;
     }
 
-    // change Name.
+    /* change Name. */
     void changeStudentName (char *_MSV, char *newName) {
-        Node *duyetmang = head;
-        while (duyetmang != nullptr) {
-            if (duyetmang->value.getMSV() == _MSV ) {
-                duyetmang->value.setTen(newName);
+        Node *duyetMang = head;
+        while (duyetMang != nullptr) {
+            if (duyetMang->value.getMSV() == _MSV ) {
+                duyetMang->value.setTen(newName);
+
+                /* free ptr */
+                duyetMang = nullptr;
                 return;
             }
-            duyetmang= duyetmang->next;
+            duyetMang= duyetMang->next;
         }
         cout << "khong tim thay SV" << endl;
+
+        /*free ptr */
+        duyetMang = nullptr;
     }
 
     void sortByName () {
@@ -246,7 +301,7 @@ public:
             {
                 if (strcmp (i->value.getTen(), j->value.getTen()) > 0) {
                     
-                    // swap.
+                    /* swap. */
                     SinhVien *temp = new SinhVien;
                     *temp = i->value;
                     i->value = j->value;
@@ -257,6 +312,9 @@ public:
             
             i = i->next;
         }
+
+        i = nullptr;
+        j = nullptr;
     }
 };
 
@@ -264,57 +322,88 @@ LinkList::LinkList(/* args */)
 {
 }
 
+/* Destructor */ 
 LinkList::~LinkList()
 {
+    /* Need to delete more */
+    // delete this->head;
+    // head = nullptr;
+    
+    while ( head != nullptr) {
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+        temp = nullptr;
+    }
 }
 
 
 int main () {
     LinkList ll1;
 
-    // add 3 students.
-    // SinhVien *sv1 = new SinhVien("DTC01", "An Nguyen", 19, 6.7f);
-    // SinhVien *sv2 = new SinhVien("DTC02", "Nguyen Thanh", 20, 6.4f);
-    // SinhVien *sv3 = new SinhVien("DTC03", "An Nguyen Thanh", 19, 7.1f);
+    /* add 3 students. */
+    /*
+    SinhVien *sv1 = new SinhVien("DTC01", "An Nguyen", 19, 6.7f);
+    SinhVien *sv2 = new SinhVien("DTC02", "Nguyen Thanh", 20, 6.4f);
+    SinhVien *sv3 = new SinhVien("DTC03", "An Nguyen Thanh", 19, 7.1f);
+    SinhVien sv4;
+    sv4.Nhap() ;
+
+    ll1.addStudent(sv1);
+    ll1.addStudent(sv2);
+    ll1.addStudent(sv3);
+    ll1.addStudent(sv4);
+    */
+
+
+    /* add 4 students */
+    /* */
+    ll1.addStudent("DTC01", "An Nguyen", 19, 6.7f);
+    ll1.addStudent("DTC02", "Nguyen Thanh", 20, 6.4f);
+    ll1.addStudent("DTC03", "An Nguyen Thanh", 19, 7.1f);
+    ll1.addStudent("DTC04", "An Nguyen Thanh", 19, 6.4f);
     
-    // ll1.addStudent(sv1);
-    // ll1.addStudent(sv2);
-    // ll1.addStudent(sv3);
 
-
-    // add 3 students
-    // ll1.addStudent("DTC01", "An Nguyen", 19, 6.7f);
-    // ll1.addStudent("DTC02", "Nguyen Thanh", 20, 6.4f);
-    // ll1.addStudent("DTC03", "An Nguyen Thanh", 19, 7.1f);
-    // ll1.addStudent("DTC04", "An Nguyen Thanh", 19, 6.4f);
+    
     
 
-    // print all.
-    // ll1.printAllStudents();
-
-    // find students have 19 years old, find by DTB, Ten, Tuoi.
-    // findStudent(19).printAllStudents();
-    // ll1.findStudent(6.1f).printAllStudents();
-    // ll1.findStudent(6.4f).printAllStudents();
-    // ll1.findStudent("DTC01").printAllStudents();
-    // ll1.findStudentByName("An Nguyen Thanh").printAllStudents();
+    /* find students have 19 years old, find by DTB, Ten, Tuoi. */
+    /*
+    ll1.findStudent(19).printAllStudents();
+    ll1.findStudent(6.1f).printAllStudents();
+    ll1.findStudent(6.4f).printAllStudents();
+    ll1.findStudent("DTC01").printAllStudents();*//*
+    ll1.findStudentByName("An Nguyen Thanh").printAllStudents();
+    */
     
-    // Del a student.
-    // ll1.deleteStudent("DTC01");
-    // ll1.printAllStudents();
+    
+    /* Del a student. */
+    /*
+    ll1.deleteStudent("DTC01");
+    ll1.printAllStudents();
+    */
 
-    // change value.
-    // ll1.changeStudentName("DT01", "Thay ten");
-    // ll1.printAllStudents();
+    /* change value. */
+    /*
+    ll1.changeStudentName("DT01", "Thay ten");
+    ll1.printAllStudents();
+    */
 
-    // sort
+    /* sort */
+    /*
     ll1.addStudent("DTC01", "1", 19, 6.7f);
     ll1.addStudent("DTC02", "3", 20, 6.4f);
     ll1.addStudent("DTC03", "2", 19, 7.1f);
     ll1.addStudent("DTC04", "0", 19, 6.4f);
-    
+    */
+
+    /* sort by name 
     ll1.sortByName();
     ll1.printAllStudents();
+    */
 
+    /* print all. */
+    /**/
+    ll1.printAllStudents();
     return 0;
 }
