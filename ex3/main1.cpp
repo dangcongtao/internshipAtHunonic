@@ -120,6 +120,8 @@ int main () {
                 temp_per = *&list_person[i];
                 list_person[i] = *&list_person[j];
                 (list_person[j]) = *(&temp_per);
+
+                /* pointer pointer to no where - to be safe */
                 temp_per = nullptr;
             }
         }
@@ -137,4 +139,16 @@ int main () {
         cout<< endl;
         cout << endl;
     }
+
+
+    /* anti leak */
+    for (int i = 0 ; i < n ; i ++) {
+        delete[] list_person[i];
+        list_person[i] = nullptr;
+    }
+    delete[] list_person;
+    list_person = nullptr;
+
+    delete[] list_house;
+    list_house = nullptr;
 }
