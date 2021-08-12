@@ -1,7 +1,16 @@
-.PHONY: main main1.o house.o person.o
+CPP=g++
+C=gcc
+
+#remove all file.
+#remove: main
+#	rm main *.o
+
+.PHONY: main clean_o
+clean_o: main
+	rm *.o
 
 main: main1.o house.o person.o
-	g++ -o main main1.o house.o person.o
+	$(CPP) -o $@ main1.o house.o person.o
 
 
 main1.o: *.h
