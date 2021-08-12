@@ -1,5 +1,4 @@
-#rule: main
-#	rm -f main main1.o house.o person.o
+.PHONY: main main1.o house.o person.o
 
 main: main1.o house.o person.o
 	g++ -o main main1.o house.o person.o
