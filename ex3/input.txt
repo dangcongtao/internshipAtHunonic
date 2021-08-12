@@ -1,0 +1,16 @@
+3
+4
+1
+nguoi mot
+3
+nguoi hai
+2
+nguoi ba
+1
+5
+7
+nguoi bon
+5
+nguoi nam
+8
+nguoi sau
