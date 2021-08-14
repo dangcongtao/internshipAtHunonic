@@ -29,7 +29,8 @@ public:
     float get_man_def (int index);
     bool get_man_euip (int index);
     int get_man_strength (int index);
-
+    int get_kind_of_man (int index);
+    
     void delete_a_man (char *_m_code);
 
     void attack (Team &_team_b);

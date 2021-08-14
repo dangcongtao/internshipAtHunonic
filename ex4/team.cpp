@@ -34,8 +34,7 @@ void Team::get_infor_a_team_with_buff_effect(FILE *file){
     fgets(temp,250,file);
 
     team = new Man*[a];
-    for ( int i = 0 ; i <a; i ++) {
-        
+    for ( int i = 0 ; i <a; i ++) {        
 
         memset(temp, 0 , sizeof(temp));
         fgets(temp, 250, file);
@@ -102,10 +101,98 @@ void Team::get_infor_a_team_with_buff_effect(FILE *file){
             *(team+i) = new Knight(_m_code, _m_attack*buff, _m_defend*buff, _m_equip, _m_strength);
         } 
         char_ptr =nullptr;
-    }
-    
+    }   
     
 }
+
+
+
+void Team::get_infor_a_team_without_buff_effect (FILE *file){
+
+    char temp[250];
+    int a;
+    char type[10];
+    char *char_ptr;
+    char _m_code[10];
+    float _m_attack;
+    float _m_defend;
+    bool _m_equip;
+    char yes_or_no[10];
+    int _m_strength;
+    float _m_experience;
+    
+    fscanf(file, "%[a-zA-Z ]",temp);
+    /* normalize */
+
+    fscanf(file, "%d", &a);
+    this->set_number_man(a);
+    fgets(temp,250,file);
+
+    team = new Man*[a];
+    for ( int i = 0 ; i <a; i ++) {        
+
+        memset(temp, 0 , sizeof(temp));
+        fgets(temp, 250, file);
+        
+        /* delete charecter \n at the end of string temp */
+        char_ptr = strtok(temp,"\n");
+        strcpy(temp, char_ptr);
+
+        /* get type */
+        memset(type, 0 , sizeof(type));
+        char_ptr = strtok(temp," ");
+        strcpy(type, char_ptr);
+
+
+        /* get m-code */
+        memset(_m_code, 0 , sizeof(_m_code));
+        char_ptr = strtok(NULL, " ");
+        strcpy(_m_code, char_ptr);
+
+        /* get m_atk */        
+        char_ptr = strtok(NULL, " ");
+        _m_attack = atof(char_ptr);
+
+        /* get m_def */
+        char_ptr = strtok(NULL, " ");
+        _m_defend = atof(char_ptr);
+
+        /* get equip*/
+        char_ptr = strtok(NULL, " ");
+        if (strcmp(char_ptr,"YES") == 0)
+            _m_equip =true;
+        else _m_equip = false;
+
+        /* get strength */
+        char_ptr = strtok(NULL, " ");
+        _m_strength = atoi(char_ptr);
+
+        /* get experince */
+        if (i == 0 ){
+            char_ptr = strtok(NULL, " ");
+            _m_experience = atof(char_ptr);
+        }    
+
+       
+        /* allocate */
+        if (strcmp(type,"AG") == 0){
+            
+            *(team+i) = new Army_General(_m_code, _m_attack, _m_defend, _m_equip, _m_strength, _m_experience);
+        }
+        if (strcmp(type,"A") == 0){
+            *(team+i) = new Archer(_m_code,_m_attack, _m_defend, _m_equip, _m_strength);
+        }
+        if (strcmp(type,"V") == 0){
+            *(team+i) = new Valiant(_m_code, _m_attack, _m_defend, _m_equip, _m_strength);
+        }
+        if (strcmp(type,"K") == 0){
+            *(team+i) = new Knight(_m_code, _m_attack, _m_defend, _m_equip, _m_strength);
+        } 
+        char_ptr =nullptr;
+    }   
+    
+}
+
 
 void Team::print_all_infor () {
     int n = this->get_number_man();
@@ -144,6 +231,10 @@ int Team::get_man_strength (int index){
     return this->team[index]->get_m_strength();
 }
 
+/* Army_general = 1, Valiant = 2, Archer = 3, Knight = 4 */
+int Team::get_kind_of_man (int index) {
+    return team[index]->get_kind_of_man();
+}
 
 
 void Team::delete_a_man (char *_m_code){
@@ -185,7 +276,9 @@ void Team::attack (Team &_team_b){
             index_team_a =0;
 
         /* if attack == 1 team a win, == 0 team b win*/
-        if (this->team[index_team_a]->attack_with_buff_effect(_team_b.get_man_attk(index_team_b), _team_b.get_man_def(index_team_b),_team_b.get_man_strength(index_team_b) ) ==1) {
+        if (this->team[index_team_a]->attack_without_buff_effect 
+        (_team_b.get_man_attk(index_team_b), _team_b.get_man_def(index_team_b),
+        _team_b.get_man_strength(index_team_b), _team_b.get_kind_of_man(index_team_b)) ==1) {
             
             /* team b lose */
             std::cout <<"team b lose\n";

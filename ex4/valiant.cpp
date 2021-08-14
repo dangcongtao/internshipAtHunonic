@@ -7,7 +7,7 @@ Valiant::Valiant(char *_m_code, float _m_attack, float _m_defend, bool _m_equip,
     strcpy(m_code, _m_code);
     m_attack = _m_attack;
     if (_m_equip)
-        m_defend = _m_defend*2;
+        m_defend = _m_defend/**2*/;
     else
         m_defend = _m_defend;
     m_equipment = _m_equip;

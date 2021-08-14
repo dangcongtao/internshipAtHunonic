@@ -10,7 +10,8 @@
     
 
 
-int Man::attack_with_buff_effect(float _m_attack, float _m_defend, float _m_strength) {
+int Man::attack_without_buff_effect (float _m_attack, float _m_defend, float _m_strength, int kind_of_man){
+
     if (this->m_defend > _m_attack && this->m_attack > _m_defend) {
         /* enermy lose */        
         return 1;
@@ -34,6 +35,45 @@ int Man::attack_with_buff_effect(float _m_attack, float _m_defend, float _m_stre
         }
     }
     return -1;
+};
+
+int Man::attack_with_buff_effect(float _m_attack, float _m_defend, float _m_strength) {
+
+    if (this->m_defend > _m_attack && this->m_attack > _m_defend) {
+        /* enermy lose */        
+        return 1;
+    }
+    if ( this->m_defend == _m_attack && this->m_attack == _m_defend){
+        /* equal */
+        if ( this->m_strength > _m_strength) {                
+            return 1;
+        }else{
+            if (this->m_strength < _m_strength){                    
+                return 0;
+            }else {
+                return -1;
+            }
+        }
+        
+    }
+
+    if (this->m_defend < _m_attack && this->m_attack < _m_defend) {
+        /* enermy win */        
+        return 0;
+    }
+    if ( this->m_defend == _m_attack && this->m_attack == _m_defend){
+        /* equal */
+        if ( this->m_strength < _m_strength) {                
+            return 0;
+        }else{
+            if (this->m_strength > _m_strength){                    
+                return 1;
+            }else {
+                return -1;
+            }
+        }
+        
+    }
 }
 
 

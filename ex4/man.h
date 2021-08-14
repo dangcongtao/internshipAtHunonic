@@ -17,7 +17,7 @@ public:
     
     /* return m_code of the winner */
     int attack_with_buff_effect (float _m_attack, float _m_defend, float _m_strength);
-    int attack_without_buff_effect (float _m_attack, float _m_defend, float _m_strength);
+    int attack_without_buff_effect (float _m_attack, float _m_defend, float _m_strength, int kind_of_man);
     virtual void print_all_man_infor ();
     
     virtual void set_all_infor(char *_m_code, float _m_attack, float _m_defend, bool _m_equip, float _m_strength, float _m_experience);
