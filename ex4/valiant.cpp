@@ -3,7 +3,7 @@
 #include "valiant.h"
 
 Valiant::Valiant(char *_m_code, float _m_attack, float _m_defend, bool _m_equip, float _m_strength) {
-    std::cout << "valiant \n";
+    
     strcpy(m_code, _m_code);
     m_attack = _m_attack;
     if (_m_equip)

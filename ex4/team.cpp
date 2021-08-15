@@ -178,6 +178,7 @@ void Team::get_infor_a_team_without_buff_effect (FILE *file){
         if (strcmp(type,"AG") == 0){
             
             *(team+i) = new Army_General(_m_code, _m_attack, _m_defend, _m_equip, _m_strength, _m_experience);
+            this->ex = _m_experience;
         }
         if (strcmp(type,"A") == 0){
             *(team+i) = new Archer(_m_code,_m_attack, _m_defend, _m_equip, _m_strength);
@@ -230,6 +231,9 @@ bool Team::get_man_euip (int index){
 int Team::get_man_strength (int index){
     return this->team[index]->get_m_strength();
 }
+float Team::get_man_ex (){
+    return this->ex;
+}
 
 /* Army_general = 1, Valiant = 2, Archer = 3, Knight = 4 */
 int Team::get_kind_of_man (int index) {
@@ -266,9 +270,8 @@ void Team::delete_a_man (char *_m_code){
 void Team::attack (Team &_team_b){
 
     int index_team_a = 1;
-    int index_team_b = 1;
+    int index_team_b = 1;    
     
-    int end = 0;
     while (_team_b.get_number_man() != 0 && this->get_number_man() != 0 ){
         if (_team_b.get_number_man() ==1)
             index_team_b = 0;
@@ -277,32 +280,43 @@ void Team::attack (Team &_team_b){
 
         /* if attack == 1 team a win, == 0 team b win*/
         if (this->team[index_team_a]->attack_without_buff_effect 
-        (_team_b.get_man_attk(index_team_b), _team_b.get_man_def(index_team_b),
-        _team_b.get_man_strength(index_team_b), _team_b.get_kind_of_man(index_team_b)) ==1) {
+        (
+        
+        _team_b.get_man_attk(index_team_b), _team_b.get_man_def(index_team_b), _team_b.get_man_euip(index_team_b),
+        _team_b.get_man_strength(index_team_b), _team_b.get_kind_of_man(index_team_b), _team_b.get_man_ex(),
+        
+        this->get_man_euip(index_team_a), this->get_kind_of_man(index_team_a), this->get_man_ex()
+        
+        /* parameter of method attack_with_buff_effect(), which is buff by AG ex + kind of solder were set into each man profile when get_infor_of_a_team called .
+        _team_b.get_man_attk(index_team_b), _team_b.get_man_def(index_team_b), _team_b.get_man_strength(index_team_b)
+        */
+
+        ) == 1) {
             
-            /* team b lose */
+            /* team b lose 
             std::cout <<"team b lose\n";
-            
+            */
+
             /* delete and set value */
             this->team[index_team_a]->set_m_def(this->team[index_team_a]->get_m_def() -20);
             _team_b.delete_a_man(_team_b.get_man_code(index_team_b));
 
-            /* print to test */
+            /* print to test 
             std::cout <<"number man a: " << this->get_number_man()<< "\n";
             std::cout <<"number team b: " << _team_b.get_number_man() << "\n\n";
-            
+            */
         }
         else {
-            /* team b win */
-            
+            /* team b win 
+            std::cout <<"team b win "<< "\n";
+            */
             this->delete_a_man(this->team[index_team_a]->get_m_code());
             _team_b.set_man_def((_team_b.get_man_def(index_team_b) -20) , index_team_b);
             
-            /* print to test */
+            /* print to test 
             std::cout <<"number man a: " << this->get_number_man()<< "\n";
             std::cout <<"number team b: " << _team_b.get_number_man() << "\n\n";
-
-        }
-        
+            */
+        }        
     }
 }

@@ -10,6 +10,7 @@ class Team
 {
 private:
     int number_man;
+    float ex = (float)1; /* shouldn't in here */
     Man **team;
 
 public:
@@ -30,7 +31,8 @@ public:
     bool get_man_euip (int index);
     int get_man_strength (int index);
     int get_kind_of_man (int index);
-    
+    float get_man_ex ();
+
     void delete_a_man (char *_m_code);
 
     void attack (Team &_team_b);
