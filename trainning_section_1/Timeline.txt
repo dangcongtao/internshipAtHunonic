@@ -1,0 +1,24 @@
+-1. OOP:
+0. pointer:
+    malloc.
+    free()
+1. linkedlist + class để nhập 1 danh sách SV.
+    gồm class người.
+    không đc memory leak.
+2. tăng số lượng class lên.
+    makefile để reference file .h tới file .cpp. -> có 2 loại makefile.
+    string with char* và char[].
+    destructor
+    delete[]
+    Virtual function. 
+    virtual destructor -> tránh memory leak.
+    memset().
+3. con tro cap hai.
+4. github and SVN:
+    edit commit.
+    add branch.
+    merge branch.
+    git diff (--cached).
+    log.
+    checkout (-b)
+5. https://www.youtube.com/watch?v=1nfuYMXjZsA&ab_channel=TheCherno

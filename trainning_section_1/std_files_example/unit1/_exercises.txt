@@ -1,0 +1,7 @@
+1. viết chuong trình hello world in ra giao diện console và sử dụng gcc để build.
+2. viết chương trình in ra console nội dung trong 1 file txt với đường dẫn tới file được đặt trong code.
+3. viết chương trình in ra tên process từ process id nhập từ bàn phím.
+4. viết chương trình có khả năng hiển thị nội dung của 1 file lên console giống với lệnh cat.
+    đặt tên nó là my_cat và copy vào thư mục bin. sau đó sử dụng giống như lệnh cat của hệ thống.
+5. viết chương trình C có khả năng in ra tọa độ của con trỏ chuột trên máy tính.
+    ví dụ: X/Y. trong đó X,Y là hoành độ và tung độ của con trỏ chuột trên màn hình
