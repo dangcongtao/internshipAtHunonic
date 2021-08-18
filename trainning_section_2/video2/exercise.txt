@@ -1,0 +1,8 @@
+0. try to count how many process has sleeping status in system.
+
+1. create a file .txt, then read its content from any position in that file.
+
+2. use readdir to print files's infor in a folder, with path to that folder can be fixed into source code
+	infor about: name, size, modify time.
+
+3. build 1 driver...... (skip).
