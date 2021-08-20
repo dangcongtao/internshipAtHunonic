@@ -1,0 +1,4 @@
+1. viết 1 chương trình c để block ctrl+C signal từ user.
+2. viết 1 chương trinh c để in ra các signal mask  của user hiện tại.
+3. viết 1 chương trình c block SIGNINT sau đó check trong số signal penđing có SIGNINT không? nếu có thì thoát chương trình.
+4. viết chương trình c sleep vô thời hạn,sau đó dùng chương trình khác để gửi tín hiệu wakeup chương trình đầu.
