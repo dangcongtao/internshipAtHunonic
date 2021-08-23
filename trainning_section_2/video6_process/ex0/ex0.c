@@ -1,5 +1,5 @@
 /*
- * program to print all eviroment variable.
+ * program to print alleviroment variable.
  *
  * */
 
@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-	extern char **environ;
+	extern char **environ; 
 	int i =  0;
 	
 	while(environ[i] != NULL) {

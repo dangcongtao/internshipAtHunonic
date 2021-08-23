@@ -1,0 +1,1 @@
+1. thiết laạp kết noios giữa 2 maý: server-client rồi gủi và nhận bản tin từ 2 bên để kiểm tra	
