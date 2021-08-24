@@ -47,12 +47,12 @@ int main (int argc, char *argv[])
 
 	err = -1;
 	while (err < 0){
-		printf ("server IP: %s PORT: %d\n", inet_ntoa(server_adress.sin_addr), ntohs(server_adress.sin_port));
+		printf ("server infor\tIP: %s,   PORT: %d\n", inet_ntoa(server_adress.sin_addr), ntohs(server_adress.sin_port));
 		printf ("my socket: %d \n",my_socket);
 		
 		
 		memset(receive_buffer, 0 , sizeof(receive_buffer));	
-		printf ("addres len: %d buffer: %s\n", addres_len, receive_buffer);
+		printf ("addres len: %d,   buffer: %s\n", addres_len, receive_buffer);
 		
 		
 		//err = read (my_socket, receive_buffer, 1);
@@ -63,7 +63,7 @@ int main (int argc, char *argv[])
 		/* err = recv(my_socket,&receive_buffer, sizeof(receive_buffer), 0); */
 		#pragma endregion
 
-		printf ("bytes received: %d buffer: %s\n", err, receive_buffer);
+		printf ("bytes received: %d, buffer: %s\n", err, receive_buffer);
 	}
 	
 	
