@@ -11,14 +11,14 @@
 #include <unistd.h>
 #include <errno.h>
 #define PORT = 5000
-#define IP_CLIENT "192.168.0.164"
+#define IP_CLIENT "192.168.0.109"
 
 int main (int argc, char *argv[])
 
 {
 	
 	/* INIT SOCKET */
-	int my_socket = socket(AF_INET, SOCK_DGRAM, 0);
+	int my_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP), new_socket;
 	int err = 0, addres_len, bytes_sent = 0;
 	struct sockaddr_in server_adress;
 	socklen_t *serv_addres_len;
@@ -27,20 +27,15 @@ int main (int argc, char *argv[])
 	 * 1MB */
 	char receive_buffer[1024];
 
-	/* memset */
 	memset(&server_adress, 0 , sizeof(server_adress));
-	memset(receive_buffer, 0 , sizeof(receive_buffer));	
 	
 	/* set values for server address. */
 	server_adress.sin_family = AF_INET;
-
-	/* set ip address */
-	/* server_adress.sin_addr.s_addr = inet_addr("192.168.0.164"); */
+	server_adress.sin_port = htons(5000);
 	err = inet_pton(AF_INET,IP_CLIENT, &server_adress.sin_addr.s_addr);
 	if (err < 0 ) {
 		printf ("Set IP err: %d\n", err);
 	}
-	server_adress.sin_port = htons(5000);
 	
     addres_len = sizeof(server_adress);
 	
@@ -52,18 +47,23 @@ int main (int argc, char *argv[])
 
 	err = -1;
 	while (err < 0){
-		printf ("server IP: %s\n", inet_ntoa(server_adress.sin_addr));
-		printf ("my socket: %d\n",my_socket);
-		printf ("addres len: %d\nbuffer: %s\n", addres_len, receive_buffer);
+		printf ("server IP: %s PORT: %d\n", inet_ntoa(server_adress.sin_addr), ntohs(server_adress.sin_port));
+		printf ("my socket: %d \n",my_socket);
 		
-		err = read (my_socket, receive_buffer, sizeof(receive_buffer));
 		
+		memset(receive_buffer, 0 , sizeof(receive_buffer));	
+		printf ("addres len: %d buffer: %s\n", addres_len, receive_buffer);
+		
+		
+		//err = read (my_socket, receive_buffer, 1);
+
+		err = recvfrom(my_socket, (char *)receive_buffer, sizeof(receive_buffer), 0, (struct sockaddr *) &server_adress, &addres_len);
 		#pragma region function read socket
+		/* err = recvfrom(my_socket, &receive_buffer, sizeof(receive_buffer), 0 , (struct sockaddr*)&server_adress, &addres_len); */
 		/* err = recv(my_socket,&receive_buffer, sizeof(receive_buffer), 0); */
-		/* err = recvfrom(my_socket, &receive_buffer, sizeof(receive_buffer), 0 , NULL, NULL); */
 		#pragma endregion
 
-		printf ("ERR: %d\nbuffer: %s\n", err, receive_buffer);
+		printf ("bytes received: %d buffer: %s\n", err, receive_buffer);
 	}
 	
 	

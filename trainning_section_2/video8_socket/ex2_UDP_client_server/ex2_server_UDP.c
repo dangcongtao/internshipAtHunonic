@@ -27,7 +27,8 @@ int main (int argc, char *argv[]) {
 
     
     /* socket with UDP transport protocol */
-    UDP_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    UDP_sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    new_UDP_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
    
     printf ("socket server: %d\n", UDP_sockfd);
     
@@ -36,11 +37,11 @@ int main (int argc, char *argv[]) {
     serv_addr.sin_addr.s_addr = inet_addr(IP_SERV);
     serv_addr.sin_port = htons(PORT);
 
-    serv_addr_len = (socklen_t)sizeof(serv_addr);
+    serv_addr_len = sizeof(serv_addr);
     printf ("serv Addr len: %d\n", serv_addr_len);
     
     /* bind */
-    err = bind(UDP_sockfd, (struct sockaddr*)&serv_addr, serv_addr_len);
+    err = bind(UDP_sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
     if (err != 0) {
         printf ("Bind Err: %s\n",  strerror(errno));
     }
@@ -50,25 +51,26 @@ int main (int argc, char *argv[]) {
 
 
     /* read ip address from client through UDP_sockfd */
-    while (bytes_read == 0) 
+    while (1) 
     {
         memset(client_mssg,0, sizeof(client_mssg));
-        bytes_read = read(UDP_sockfd, client_mssg, 1024);
+        bytes_read = recvfrom(UDP_sockfd, client_mssg, sizeof(client_mssg), 0, (struct sockaddr *) &client_addr, &serv_addr_len);
         if (bytes_read > 0)
         {
+            
             printf ("bytes read: %d\n",bytes_read);
             /* fork(); */
             bytes_read  = 1;
             client_addr_len = sizeof (client_addr);
-            err = getsockname(UDP_sockfd, (struct sockaddr*)&client_addr, &client_addr_len);
+            // err = getsockname(UDP_sockfd, (struct sockaddr*)&client_addr, &client_addr_len);
             //printf ("Get Socket name: %d\n", err);
 
             printf ("value read: %s\n", client_mssg);
         
-            printf ("client ip = %s\n", inet_ntoa(client_addr.sin_addr));
+            printf ("client ip = %s   PORT: %d\n" ,inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
 
             /* sent to client. */
-            bytes_sent = sendto(UDP_sockfd, (char*)hello_fromserv, strlen(hello_fromserv), 0,(struct sockaddr *)&client_addr, (socklen_t)client_addr_len);
+            bytes_sent = sendto(UDP_sockfd, hello_fromserv, strlen(hello_fromserv), 0,(struct sockaddr *)&client_addr, client_addr_len);
 
             printf ("Bytes sent: %d\n", bytes_sent);
         }else {
