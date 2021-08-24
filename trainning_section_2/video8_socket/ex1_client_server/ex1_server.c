@@ -46,7 +46,7 @@ int main (int argc, char* argv[])
 	listen(listen_socket,10);
 	
 	address_len = sizeof(server_addr);
-	connect_socket = accept(listen_socket, (struct sockaddr*)&server_addr, (socklen_t*)&address_len);
+	connect_socket = accept(listen_socket, (struct sockaddr*)&server_addr,(socklen_t*)&address_len);
 	if (connect_socket < 0 ){
 		printf("accept err: %d\n", connect_socket);
 	}
