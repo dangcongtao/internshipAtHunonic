@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <errno.h>
 #define PORT = 5000
-#define IP_CLIENT "192.168.0.109"
+#define IP_CLIENT "192.168.0.164"
 
 int main (int argc, char *argv[])
 
