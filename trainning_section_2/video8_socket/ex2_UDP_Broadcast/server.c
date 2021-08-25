@@ -12,62 +12,46 @@
 #include <sys/errno.h>
 #include <error.h>
 
-#define PORT 5000
-#define IP_SERV "192.168.0.164"
+#define PORT 8888
+const char* cmd_udp = "{\"gateway\":1, \"brand\":\"HUNONIC\"}";
+
+char messg_to_broadcast[1024] = "hello this is message form server UDP Broadcast";
+char  *broadcast_network = "192.168.0.255";
+
+
+
 
 int main (int argc, char *argv[]) {
 
-    struct sockaddr_in serv_addr, client_addr;
-    int UDP_sockfd = 0, err = 0, bytes_sent = 0, bytes_read = 0, client_addr_len;
-    char hello_fromserv[1024] = "hello this is message form server UDP Broadcast";
-    char client_mssg[1024], *client_ip_string;
+    struct sockaddr_in broadcast_addr;
+    int UDP_sockfd = 0, err = 0, bytes_sent = 0, bytes_read = 0, broadcast_addr_len;
+    char client_mssg[1024];
     int broadcast_permission = 1;
     socklen_t serv_addr_len;
 
-
-
-    
     /* socket with UDP transport protocol */
     UDP_sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-   
    /* set option SO_BROADCAST for socket. */
     setsockopt(UDP_sockfd, SOL_SOCKET, SO_BROADCAST, (void*)&broadcast_permission, sizeof(broadcast_permission));
 
     /* set address to send to this addr */
-    client_addr.sin_family = AF_INET;
-    inet_pton(AF_INET,"192.168.0.255", &client_addr.sin_addr.s_addr);
-    client_addr.sin_port = htons(PORT);
+    broadcast_addr.sin_family = AF_INET;
+    inet_pton(AF_INET,broadcast_network, &broadcast_addr.sin_addr.s_addr);
+    broadcast_addr.sin_port = htons(PORT);
+    broadcast_addr_len = sizeof(broadcast_addr);
 
-    serv_addr.sin_family = AF_INET;
-    inet_pton(AF_INET, "192.168.0.164", &serv_addr.sin_addr.s_addr);
-    serv_addr.sin_port = htons(PORT);
-
-    client_addr_len = sizeof(client_addr);
-    printf ("serv Addr len: %d\n", client_addr_len);
-    
-    /* to receive a package U must bind to assign a port. */
-    err = bind (UDP_sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
-    if (err < 0) {
-        printf ("bind err: %d\n", err);
-    }
-
-
-
-
-    
     bytes_read  = 1;
-    client_addr_len = sizeof (client_addr);
+    broadcast_addr_len = sizeof (broadcast_addr);
     
-    printf ("client ip = %s   PORT: %d\n" ,inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+    /* print infor */
+    printf ("serv Addr len: %d\n", broadcast_addr_len);
+    printf ("client ip = %s   PORT: %d\n" ,inet_ntoa(broadcast_addr.sin_addr), ntohs(broadcast_addr.sin_port));
 
     /* sent to client. */
     while (1){
-
-        bytes_sent = sendto(UDP_sockfd, hello_fromserv, strlen(hello_fromserv), 0,(struct sockaddr *)&client_addr, (socklen_t)client_addr_len);
-
+        bytes_sent = sendto(UDP_sockfd, cmd_udp, strlen(cmd_udp), 0,(struct sockaddr *)&broadcast_addr, (socklen_t)broadcast_addr_len);
         printf ("Bytes sent: %d\n", bytes_sent);
     }
-      
 
     return 0;
 }
