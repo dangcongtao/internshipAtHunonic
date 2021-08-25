@@ -18,7 +18,7 @@
 int main (int argc, char *argv[]) {
 
     struct sockaddr_in serv_addr, client_addr;
-    int UDP_sockfd = 0, new_UDP_sockfd = 0, err = 0, bytes_sent = 0, bytes_read = 0, opt =1, client_addr_len;
+    int UDP_sockfd = 0, err = 0, bytes_sent = 0, bytes_read = 0, opt =1, client_addr_len;
     char hello_fromserv[1024] = "hello this is message form server";
     char client_mssg[1024], *client_ip_string;
     socklen_t serv_addr_len;
@@ -28,7 +28,6 @@ int main (int argc, char *argv[]) {
     
     /* socket with UDP transport protocol */
     UDP_sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    new_UDP_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
    
     printf ("socket server: %d\n", UDP_sockfd);
     
@@ -62,9 +61,10 @@ int main (int argc, char *argv[]) {
             /* fork(); */
             bytes_read  = 1;
             client_addr_len = sizeof (client_addr);
-            // err = getsockname(UDP_sockfd, (struct sockaddr*)&client_addr, &client_addr_len);
-            //printf ("Get Socket name: %d\n", err);
 
+            /* don't use it, will cause bug for send package. */
+            /* err = getsockname(UDP_sockfd, (struct sockaddr*)&client_addr, &client_addr_len); */
+            
             printf ("value read: %s\n", client_mssg);
         
             printf ("client ip = %s   PORT: %d\n" ,inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
