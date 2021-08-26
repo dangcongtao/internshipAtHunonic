@@ -10,6 +10,8 @@
 #include <unistd.h>
 #include <errno.h>
 
+#define HS_TCP_PORT	49999
+
 int main (int argc, char *argv[])
 {
 	/* INIT SOCKET */
@@ -20,7 +22,7 @@ int main (int argc, char *argv[])
 
 	/* declare return value of server send for client.
 	 * 1MB */
-	char receive_buffer[1024];
+	char receive_buffer[1024], *hello = "hello from client TCP";
 
 
 	memset(&my_server_adress, 0 , sizeof(my_server_adress));
@@ -28,16 +30,19 @@ int main (int argc, char *argv[])
 	
 	/* set values for server address. */
 	my_server_adress.sin_family = AF_INET;
+	
+	/* set port */
+	my_server_adress.sin_port = htons(HS_TCP_PORT);
 
 	/* set ip address */
 	/* my_server_adress.sin_addr.s_addr = inet_addr("192.168.0.164"); */
-	err = inet_pton(AF_INET,"192.168.0.164", &my_server_adress.sin_addr.s_addr);
+	my_server_adress.sin_addr.s_addr = INADDR_ANY;
+
+	
 	if (err < 0 ) {
 		printf ("Set IP err: %d\n", err);
 	}
-
-	/* set port */
-	my_server_adress.sin_port = htons(5000);
+	printf ("code here\n");
 
 	err = connect(my_socket, (struct sockaddr *)&my_server_adress, sizeof(my_server_adress) );
 	if (err == 0)
@@ -45,9 +50,12 @@ int main (int argc, char *argv[])
 		/* connect success */
 		printf ("\nconnect sucessfully!!\n");
 		int len = 0;
+
+		err = send(my_socket, hello, strlen(hello), 0);
+		printf ("bytes sent: %d\n", err);
 		
-		while (len == 0)
-		len = read(my_socket, &receive_buffer, 1024);
+		/* while (len == 0)
+		len = read(my_socket, &receive_buffer, 1024); */
 
 		printf ("received: %s\n", receive_buffer);
 

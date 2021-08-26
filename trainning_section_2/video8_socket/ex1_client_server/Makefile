@@ -1,4 +1,7 @@
-.PHONY: server, run_server, run_client
+.PHONY: build server, run_server, run_client, remove
+
+
+build: server client
 
 run_server: server client
 	./server
@@ -11,5 +14,5 @@ client: ex1_client.c
 	gcc -o client ex1_client.c
 
 
-clean:
+remove:
 	rm client server

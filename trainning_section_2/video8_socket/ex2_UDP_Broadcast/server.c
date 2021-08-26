@@ -12,7 +12,7 @@
 #include <sys/errno.h>
 #include <error.h>
 
-#define PORT 9000
+#define PORT 8888
 const char* cmd_udp = "{\"gateway\":1, \"brand\":\"HUNONIC\"}";
 char messg_to_broadcast[1024] = "hello this is message form server UDP Broadcast";
 
