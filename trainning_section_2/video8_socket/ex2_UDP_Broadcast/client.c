@@ -6,8 +6,7 @@
 #include <string.h> /* for strerr() */
 
 /* define const */
-#define PORT 8888
-char *broadcast_network = "192.168.0.255";
+#define PORT 9000
 
 
 int main (int argc, char *argv[]) {
@@ -21,12 +20,12 @@ int main (int argc, char *argv[]) {
     if (sockfd < 0){
         printf("socket Err: %d\n", sockfd);
     }
-
-    setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, (void *)&broadcast_permission, (socklen_t)sizeof(broadcast_permission));
    
     broadcast_addr.sin_family = AF_INET;
-    inet_pton(AF_INET, broadcast_network, &broadcast_addr.sin_addr.s_addr);
+    broadcast_addr.sin_addr.s_addr = INADDR_BROADCAST;
     broadcast_addr.sin_port = htons(PORT);
+
+    setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, (void *)&broadcast_permission, (socklen_t)sizeof(broadcast_permission));
 
     counter = bind(sockfd, (struct sockaddr*)&broadcast_addr, (socklen_t)sizeof(broadcast_addr));
     if (counter < 0){

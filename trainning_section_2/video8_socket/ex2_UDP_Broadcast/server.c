@@ -12,13 +12,9 @@
 #include <sys/errno.h>
 #include <error.h>
 
-#define PORT 8888
+#define PORT 9000
 const char* cmd_udp = "{\"gateway\":1, \"brand\":\"HUNONIC\"}";
-
 char messg_to_broadcast[1024] = "hello this is message form server UDP Broadcast";
-char  *broadcast_network = "192.168.0.255";
-
-
 
 
 int main (int argc, char *argv[]) {
@@ -36,7 +32,7 @@ int main (int argc, char *argv[]) {
 
     /* set address to send to this addr */
     broadcast_addr.sin_family = AF_INET;
-    inet_pton(AF_INET,broadcast_network, &broadcast_addr.sin_addr.s_addr);
+    broadcast_addr.sin_addr.s_addr = INADDR_BROADCAST;
     broadcast_addr.sin_port = htons(PORT);
     broadcast_addr_len = sizeof(broadcast_addr);
 
@@ -51,6 +47,7 @@ int main (int argc, char *argv[]) {
     while (1){
         bytes_sent = sendto(UDP_sockfd, cmd_udp, strlen(cmd_udp), 0,(struct sockaddr *)&broadcast_addr, (socklen_t)broadcast_addr_len);
         printf ("Bytes sent: %d\n", bytes_sent);
+        usleep(1000000);
     }
 
     return 0;
