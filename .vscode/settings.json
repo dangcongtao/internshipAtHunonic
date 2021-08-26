@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "pthread.h": "c",
+        "stdio.h": "c",
+        "stat.h": "c",
+        "udp_broadcast.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "system_error": "c",
+        "system_typedef.h": "c",
+        "aes_cbc128.h": "c"
+    }
+}
