@@ -150,9 +150,9 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
  *(.dynsym)
  .dynsym        0x00000000000003c8      0x378 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
 
-.dynstr         0x0000000000000740      0x1d7
+.dynstr         0x0000000000000740      0x1d8
  *(.dynstr)
- .dynstr        0x0000000000000740      0x1d7 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .dynstr        0x0000000000000740      0x1d8 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
 
 .gnu.version    0x0000000000000918       0x4a
  *(.gnu.version)
@@ -244,7 +244,7 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
                 0x00000000000012f0                memcpy@@GLIBC_2.14
                 0x0000000000001300                __isoc99_sscanf@@GLIBC_2.7
                 0x0000000000001310                listen@@GLIBC_2.2.5
-                0x0000000000001320                __strcpy_chk@@GLIBC_2.3.4
+                0x0000000000001320                __strncpy_chk@@GLIBC_2.3.4
                 0x0000000000001330                __printf_chk@@GLIBC_2.3.4
                 0x0000000000001340                bind@@GLIBC_2.2.5
                 0x0000000000001350                fopen@@GLIBC_2.2.5
@@ -255,7 +255,7 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
                 0x00000000000013a0                __sprintf_chk@@GLIBC_2.3.4
                 0x00000000000013b0                socket@@GLIBC_2.2.5
 
-.text           0x00000000000013c0     0x7b35
+.text           0x00000000000013c0     0x8025
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
@@ -383,97 +383,96 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
                 0x0000000000008870                clear_request_send_udp
                 0x0000000000008880                udp_thread
  *fill*         0x000000000000899f        0x1 
- .text          0x00000000000089a0      0x4d6 build_app/tcp_server.o
-                0x0000000000008b80                tcp_thread
- .text          0x0000000000008e76        0x0 build_app/main.o
- *fill*         0x0000000000008e76        0xa 
- .text          0x0000000000008e80       0x75 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
-                0x0000000000008e80                __libc_csu_init
-                0x0000000000008ef0                __libc_csu_fini
- .text          0x0000000000008ef5        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
- .text          0x0000000000008ef5        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
+ .text          0x00000000000089a0      0x9cd build_app/tcp_server.o
+                0x0000000000009060                tcp_thread
+ .text          0x000000000000936d        0x0 build_app/main.o
+ *fill*         0x000000000000936d        0x3 
+ .text          0x0000000000009370       0x75 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+                0x0000000000009370                __libc_csu_init
+                0x00000000000093e0                __libc_csu_fini
+ .text          0x00000000000093e5        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
+ .text          0x00000000000093e5        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
  *(.gnu.warning)
 
-.fini           0x0000000000008ef8        0xd
+.fini           0x00000000000093e8        0xd
  *(SORT_NONE(.fini))
- .fini          0x0000000000008ef8        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o
-                0x0000000000008ef8                _fini
- .fini          0x0000000000008f00        0x5 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
+ .fini          0x00000000000093e8        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o
+                0x00000000000093e8                _fini
+ .fini          0x00000000000093f0        0x5 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
                 [!provide]                        PROVIDE (__etext = .)
                 [!provide]                        PROVIDE (_etext = .)
                 [!provide]                        PROVIDE (etext = .)
-                0x0000000000009000                . = ALIGN (CONSTANT (MAXPAGESIZE))
-                0x0000000000009000                . = SEGMENT_START ("rodata-segment", (ALIGN (CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 0x1))))
+                0x000000000000a000                . = ALIGN (CONSTANT (MAXPAGESIZE))
+                0x000000000000a000                . = SEGMENT_START ("rodata-segment", (ALIGN (CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 0x1))))
 
-.rodata         0x0000000000009000      0x830
+.rodata         0x000000000000a000      0x920
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata.cst4   0x0000000000009000        0x4 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000009000                _IO_stdin_used
- *fill*         0x0000000000009004       0x1c 
- .rodata        0x0000000000009020      0x220 build_app/aes.o
+ .rodata.cst4   0x000000000000a000        0x4 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+                0x000000000000a000                _IO_stdin_used
+ *fill*         0x000000000000a004       0x1c 
+ .rodata        0x000000000000a020      0x220 build_app/aes.o
  .rodata.str1.1
-                0x0000000000009240        0x6 build_app/base64.o
- *fill*         0x0000000000009246        0xa 
- .rodata.cst16  0x0000000000009250       0x30 build_app/base64.o
+                0x000000000000a240        0x6 build_app/base64.o
+ *fill*         0x000000000000a246        0xa 
+ .rodata.cst16  0x000000000000a250       0x30 build_app/base64.o
  .rodata.str1.1
-                0x0000000000009280       0x31 build_app/cJSON.o
- *fill*         0x00000000000092b1        0x3 
- .rodata        0x00000000000092b4      0x368 build_app/cJSON.o
- *fill*         0x000000000000961c        0x4 
- .rodata.cst16  0x0000000000009620       0x20 build_app/cJSON.o
- .rodata.cst8   0x0000000000009640       0x28 build_app/cJSON.o
- .rodata.cst4   0x0000000000009668        0x4 build_app/cJSON.o
+                0x000000000000a280       0x31 build_app/cJSON.o
+ *fill*         0x000000000000a2b1        0x3 
+ .rodata        0x000000000000a2b4      0x368 build_app/cJSON.o
+ *fill*         0x000000000000a61c        0x4 
+ .rodata.cst16  0x000000000000a620       0x20 build_app/cJSON.o
+ .rodata.cst8   0x000000000000a640       0x28 build_app/cJSON.o
+ .rodata.cst4   0x000000000000a668        0x4 build_app/cJSON.o
  .rodata.str1.1
-                0x000000000000966c       0x6b build_app/udp_broadcast.o
- *fill*         0x00000000000096d7        0x1 
+                0x000000000000a66c       0x6b build_app/udp_broadcast.o
+ *fill*         0x000000000000a6d7        0x1 
  .rodata.str1.8
-                0x00000000000096d8       0x21 build_app/udp_broadcast.o
+                0x000000000000a6d8       0x21 build_app/udp_broadcast.o
  .rodata.str1.1
-                0x00000000000096f9       0xda build_app/tcp_server.o
-                                        0x107 (size before relaxing)
- *fill*         0x00000000000097d3        0x5 
+                0x000000000000a6f9      0x191 build_app/tcp_server.o
+                                        0x1ce (size before relaxing)
+ *fill*         0x000000000000a88a        0x6 
  .rodata.str1.8
-                0x00000000000097d8       0x20 build_app/tcp_server.o
- *fill*         0x00000000000097f8        0x8 
- .rodata.cst16  0x0000000000009800       0x30 build_app/tcp_server.o
+                0x000000000000a890       0x50 build_app/tcp_server.o
+ .rodata.cst16  0x000000000000a8e0       0x40 build_app/tcp_server.o
 
 .rodata1
  *(.rodata1)
 
-.eh_frame_hdr   0x0000000000009830      0x3d4
+.eh_frame_hdr   0x000000000000a920      0x3dc
  *(.eh_frame_hdr)
- .eh_frame_hdr  0x0000000000009830      0x3d4 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000009830                __GNU_EH_FRAME_HDR
+ .eh_frame_hdr  0x000000000000a920      0x3dc /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+                0x000000000000a920                __GNU_EH_FRAME_HDR
  *(.eh_frame_entry .eh_frame_entry.*)
 
-.eh_frame       0x0000000000009c08     0x1568
+.eh_frame       0x000000000000ad00     0x1590
  *(.eh_frame)
- .eh_frame      0x0000000000009c08       0x30 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .eh_frame      0x000000000000ad00       0x30 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
                                          0x2c (size before relaxing)
- *fill*         0x0000000000009c38        0x0 
- .eh_frame      0x0000000000009c38       0x28 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ *fill*         0x000000000000ad30        0x0 
+ .eh_frame      0x000000000000ad30       0x28 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
                                          0x40 (size before relaxing)
- .eh_frame      0x0000000000009c60       0x18 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .eh_frame      0x000000000000ad58       0x18 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
                                          0x30 (size before relaxing)
- .eh_frame      0x0000000000009c78       0x18 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .eh_frame      0x000000000000ad70       0x18 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
                                          0x30 (size before relaxing)
- .eh_frame      0x0000000000009c90      0x1d0 build_app/aes.o
+ .eh_frame      0x000000000000ad88      0x1d0 build_app/aes.o
                                         0x1e8 (size before relaxing)
- .eh_frame      0x0000000000009e60       0xc8 build_app/aes_cbc128.o
+ .eh_frame      0x000000000000af58       0xc8 build_app/aes_cbc128.o
                                          0xe0 (size before relaxing)
- .eh_frame      0x0000000000009f28      0x118 build_app/base64.o
+ .eh_frame      0x000000000000b020      0x118 build_app/base64.o
                                         0x130 (size before relaxing)
- .eh_frame      0x000000000000a040      0xf98 build_app/cJSON.o
+ .eh_frame      0x000000000000b138      0xf98 build_app/cJSON.o
                                         0xfb0 (size before relaxing)
- .eh_frame      0x000000000000afd8       0x70 build_app/udp_broadcast.o
+ .eh_frame      0x000000000000c0d0       0x70 build_app/udp_broadcast.o
                                          0x88 (size before relaxing)
- .eh_frame      0x000000000000b048       0xb0 build_app/tcp_server.o
-                                         0xc8 (size before relaxing)
- .eh_frame      0x000000000000b0f8       0x18 build_app/main.o
+ .eh_frame      0x000000000000c140       0xd8 build_app/tcp_server.o
+                                         0xf0 (size before relaxing)
+ .eh_frame      0x000000000000c218       0x18 build_app/main.o
                                          0x30 (size before relaxing)
- .eh_frame      0x000000000000b110       0x5c /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .eh_frame      0x000000000000c230       0x5c /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
                                          0x78 (size before relaxing)
- .eh_frame      0x000000000000b16c        0x4 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
+ .eh_frame      0x000000000000c28c        0x4 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
  *(.eh_frame.*)
 
 .gcc_except_table
@@ -484,7 +483,7 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
 
 .exception_ranges
  *(.exception_ranges*)
-                0x000000000000ccb8                . = DATA_SEGMENT_ALIGN (CONSTANT (MAXPAGESIZE), CONSTANT (COMMONPAGESIZE))
+                0x000000000000dcb8                . = DATA_SEGMENT_ALIGN (CONSTANT (MAXPAGESIZE), CONSTANT (COMMONPAGESIZE))
 
 .eh_frame
  *(.eh_frame)
@@ -499,7 +498,7 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
 .exception_ranges
  *(.exception_ranges*)
 
-.tdata          0x000000000000ccb8        0x0
+.tdata          0x000000000000dcb8        0x0
                 [!provide]                        PROVIDE (__tdata_start = .)
  *(.tdata .tdata.* .gnu.linkonce.td.*)
 
@@ -507,23 +506,23 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
  *(.tbss .tbss.* .gnu.linkonce.tb.*)
  *(.tcommon)
 
-.preinit_array  0x000000000000ccb8        0x0
+.preinit_array  0x000000000000dcb8        0x0
                 [!provide]                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
                 [!provide]                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x000000000000ccb8        0x8
-                0x000000000000ccb8                PROVIDE (__init_array_start = .)
+.init_array     0x000000000000dcb8        0x8
+                0x000000000000dcb8                PROVIDE (__init_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
- .init_array    0x000000000000ccb8        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
-                0x000000000000ccc0                PROVIDE (__init_array_end = .)
+ .init_array    0x000000000000dcb8        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
+                0x000000000000dcc0                PROVIDE (__init_array_end = .)
 
-.fini_array     0x000000000000ccc0        0x8
+.fini_array     0x000000000000dcc0        0x8
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
- .fini_array    0x000000000000ccc0        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
+ .fini_array    0x000000000000dcc0        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
 
 .ctors
@@ -543,114 +542,114 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
 .jcr
  *(.jcr)
 
-.data.rel.ro    0x000000000000ccc8        0x0
+.data.rel.ro    0x000000000000dcc8        0x0
  *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
  *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*)
- .data.rel.ro   0x000000000000ccc8        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .data.rel.ro   0x000000000000dcc8        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
 
-.dynamic        0x000000000000ccc8      0x200
+.dynamic        0x000000000000dcc8      0x200
  *(.dynamic)
- .dynamic       0x000000000000ccc8      0x200 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
-                0x000000000000ccc8                _DYNAMIC
+ .dynamic       0x000000000000dcc8      0x200 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+                0x000000000000dcc8                _DYNAMIC
 
-.got            0x000000000000cec8      0x138
+.got            0x000000000000dec8      0x138
  *(.got.plt)
- .got.plt       0x000000000000cec8       0xf8 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
-                0x000000000000cec8                _GLOBAL_OFFSET_TABLE_
+ .got.plt       0x000000000000dec8       0xf8 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+                0x000000000000dec8                _GLOBAL_OFFSET_TABLE_
  *(.igot.plt)
  *(.got)
- .got           0x000000000000cfc0       0x40 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .got           0x000000000000dfc0       0x40 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
  *(.igot)
-                0x000000000000d000                . = DATA_SEGMENT_RELRO_END (., 0x0)
+                0x000000000000e000                . = DATA_SEGMENT_RELRO_END (., 0x0)
 
-.data           0x000000000000d000       0x9c
+.data           0x000000000000e000       0x9c
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x000000000000d000        0x4 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
-                0x000000000000d000                data_start
-                0x000000000000d000                __data_start
- .data          0x000000000000d004        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o
- .data          0x000000000000d004        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
- *fill*         0x000000000000d004        0x4 
+ .data          0x000000000000e000        0x4 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+                0x000000000000e000                data_start
+                0x000000000000e000                __data_start
+ .data          0x000000000000e004        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o
+ .data          0x000000000000e004        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
+ *fill*         0x000000000000e004        0x4 
  .data.rel.local
-                0x000000000000d008        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
-                0x000000000000d008                __dso_handle
- .data          0x000000000000d010        0x0 build_app/aes.o
- .data          0x000000000000d010        0x0 build_app/aes_cbc128.o
- *fill*         0x000000000000d010       0x10 
- .data          0x000000000000d020       0x41 build_app/base64.o
-                0x000000000000d020                b64_chr
- .data          0x000000000000d061        0x0 build_app/cJSON.o
- *fill*         0x000000000000d061        0xf 
- .data.rel      0x000000000000d070       0x18 build_app/cJSON.o
- .data          0x000000000000d088        0x8 build_app/udp_broadcast.o
+                0x000000000000e008        0x8 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
+                0x000000000000e008                __dso_handle
+ .data          0x000000000000e010        0x0 build_app/aes.o
+ .data          0x000000000000e010        0x0 build_app/aes_cbc128.o
+ *fill*         0x000000000000e010       0x10 
+ .data          0x000000000000e020       0x41 build_app/base64.o
+                0x000000000000e020                b64_chr
+ .data          0x000000000000e061        0x0 build_app/cJSON.o
+ *fill*         0x000000000000e061        0xf 
+ .data.rel      0x000000000000e070       0x18 build_app/cJSON.o
+ .data          0x000000000000e088        0x8 build_app/udp_broadcast.o
  .data.rel.local
-                0x000000000000d090        0x8 build_app/udp_broadcast.o
-                0x000000000000d090                cmd_udp
- .data          0x000000000000d098        0x4 build_app/tcp_server.o
- .data          0x000000000000d09c        0x0 build_app/main.o
- .data          0x000000000000d09c        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
- .data          0x000000000000d09c        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
- .data          0x000000000000d09c        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
+                0x000000000000e090        0x8 build_app/udp_broadcast.o
+                0x000000000000e090                cmd_udp
+ .data          0x000000000000e098        0x4 build_app/tcp_server.o
+ .data          0x000000000000e09c        0x0 build_app/main.o
+ .data          0x000000000000e09c        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .data          0x000000000000e09c        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
+ .data          0x000000000000e09c        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
 
 .tm_clone_table
-                0x000000000000d0a0        0x0
+                0x000000000000e0a0        0x0
  .tm_clone_table
-                0x000000000000d0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
+                0x000000000000e0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
  .tm_clone_table
-                0x000000000000d0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
+                0x000000000000e0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
 
 .data1
  *(.data1)
-                0x000000000000d09c                _edata = .
+                0x000000000000e09c                _edata = .
                 [!provide]                        PROVIDE (edata = .)
-                0x000000000000d0a0                . = .
-                0x000000000000d09c                __bss_start = .
+                0x000000000000e0a0                . = .
+                0x000000000000e09c                __bss_start = .
 
-.bss            0x000000000000d0a0     0x11b0
+.bss            0x000000000000e0a0     0x14b0
  *(.dynbss)
- .dynbss        0x000000000000d0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .dynbss        0x000000000000e0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss           0x000000000000d0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
- .bss           0x000000000000d0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o
- .bss           0x000000000000d0a0        0x1 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
- .bss           0x000000000000d0a1        0x0 build_app/aes.o
- .bss           0x000000000000d0a1        0x0 build_app/aes_cbc128.o
- .bss           0x000000000000d0a1        0x0 build_app/base64.o
- *fill*         0x000000000000d0a1        0xf 
- .bss           0x000000000000d0b0       0x20 build_app/cJSON.o
- *fill*         0x000000000000d0d0       0x10 
- .bss           0x000000000000d0e0      0x400 build_app/udp_broadcast.o
- .bss           0x000000000000d4e0      0xc80 build_app/tcp_server.o
- .bss           0x000000000000e160        0x0 build_app/main.o
- .bss           0x000000000000e160        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
- .bss           0x000000000000e160        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
- .bss           0x000000000000e160        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
+ .bss           0x000000000000e0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o
+ .bss           0x000000000000e0a0        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crti.o
+ .bss           0x000000000000e0a0        0x1 /usr/lib/gcc/x86_64-linux-gnu/9/crtbeginS.o
+ .bss           0x000000000000e0a1        0x0 build_app/aes.o
+ .bss           0x000000000000e0a1        0x0 build_app/aes_cbc128.o
+ .bss           0x000000000000e0a1        0x0 build_app/base64.o
+ *fill*         0x000000000000e0a1        0xf 
+ .bss           0x000000000000e0b0       0x20 build_app/cJSON.o
+ *fill*         0x000000000000e0d0       0x10 
+ .bss           0x000000000000e0e0      0x400 build_app/udp_broadcast.o
+ .bss           0x000000000000e4e0      0xf80 build_app/tcp_server.o
+ .bss           0x000000000000f460        0x0 build_app/main.o
+ .bss           0x000000000000f460        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+ .bss           0x000000000000f460        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/crtendS.o
+ .bss           0x000000000000f460        0x0 /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
  *(COMMON)
- COMMON         0x000000000000e160       0xe0 build_app/aes_cbc128.o
-                0x000000000000e160                aes_error_code_t
-                0x000000000000e180                m_ctx
- COMMON         0x000000000000e240       0x10 build_app/main.o
-                0x000000000000e240                udp_thread_obj
-                0x000000000000e248                tcp_thread_obj
-                0x000000000000e250                . = ALIGN ((. != 0x0)?0x8:0x1)
+ COMMON         0x000000000000f460       0xe0 build_app/aes_cbc128.o
+                0x000000000000f460                aes_error_code_t
+                0x000000000000f480                m_ctx
+ COMMON         0x000000000000f540       0x10 build_app/main.o
+                0x000000000000f540                udp_thread_obj
+                0x000000000000f548                tcp_thread_obj
+                0x000000000000f550                . = ALIGN ((. != 0x0)?0x8:0x1)
 
 .lbss
  *(.dynlbss)
  *(.lbss .lbss.* .gnu.linkonce.lb.*)
  *(LARGE_COMMON)
-                0x000000000000e250                . = ALIGN (0x8)
-                0x000000000000e250                . = SEGMENT_START ("ldata-segment", .)
+                0x000000000000f550                . = ALIGN (0x8)
+                0x000000000000f550                . = SEGMENT_START ("ldata-segment", .)
 
 .lrodata
  *(.lrodata .lrodata.* .gnu.linkonce.lr.*)
 
-.ldata          0x0000000000010250        0x0
+.ldata          0x0000000000011550        0x0
  *(.ldata .ldata.* .gnu.linkonce.l.*)
-                0x0000000000010250                . = ALIGN ((. != 0x0)?0x8:0x1)
-                0x0000000000010250                . = ALIGN (0x8)
-                0x000000000000e250                _end = .
+                0x0000000000011550                . = ALIGN ((. != 0x0)?0x8:0x1)
+                0x0000000000011550                . = ALIGN (0x8)
+                0x000000000000f550                _end = .
                 [!provide]                        PROVIDE (end = .)
-                0x0000000000010250                . = DATA_SEGMENT_END (.)
+                0x0000000000011550                . = DATA_SEGMENT_END (.)
 
 .stab
  *(.stab)
@@ -718,40 +717,40 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0xed1d
+.debug_info     0x0000000000000000     0xfb77
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000     0x10b2 build_app/aes.o
  .debug_info    0x00000000000010b2      0xa72 build_app/aes_cbc128.o
  .debug_info    0x0000000000001b24      0xaab build_app/base64.o
  .debug_info    0x00000000000025cf     0xa216 build_app/cJSON.o
  .debug_info    0x000000000000c7e5      0xb0e build_app/udp_broadcast.o
- .debug_info    0x000000000000d2f3     0x156e build_app/tcp_server.o
- .debug_info    0x000000000000e861      0x4bc build_app/main.o
+ .debug_info    0x000000000000d2f3     0x23c8 build_app/tcp_server.o
+ .debug_info    0x000000000000f6bb      0x4bc build_app/main.o
 
-.debug_abbrev   0x0000000000000000     0x163a
+.debug_abbrev   0x0000000000000000     0x16bf
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x3e1 build_app/aes.o
  .debug_abbrev  0x00000000000003e1      0x287 build_app/aes_cbc128.o
  .debug_abbrev  0x0000000000000668      0x230 build_app/base64.o
  .debug_abbrev  0x0000000000000898      0x63c build_app/cJSON.o
  .debug_abbrev  0x0000000000000ed4      0x2d2 build_app/udp_broadcast.o
- .debug_abbrev  0x00000000000011a6      0x34b build_app/tcp_server.o
- .debug_abbrev  0x00000000000014f1      0x149 build_app/main.o
+ .debug_abbrev  0x00000000000011a6      0x3d0 build_app/tcp_server.o
+ .debug_abbrev  0x0000000000001576      0x149 build_app/main.o
 
-.debug_line     0x0000000000000000     0x9282
+.debug_line     0x0000000000000000     0x9736
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000     0x1824 build_app/aes.o
  .debug_line    0x0000000000001824      0x3da build_app/aes_cbc128.o
  .debug_line    0x0000000000001bfe      0x786 build_app/base64.o
  .debug_line    0x0000000000002384     0x629a build_app/cJSON.o
  .debug_line    0x000000000000861e      0x3a5 build_app/udp_broadcast.o
- .debug_line    0x00000000000089c3      0x73f build_app/tcp_server.o
- .debug_line    0x0000000000009102      0x180 build_app/main.o
+ .debug_line    0x00000000000089c3      0xbf3 build_app/tcp_server.o
+ .debug_line    0x00000000000095b6      0x180 build_app/main.o
 
 .debug_frame
  *(.debug_frame)
 
-.debug_str      0x0000000000000000     0x19bc
+.debug_str      0x0000000000000000     0x1a9f
  *(.debug_str)
  .debug_str     0x0000000000000000      0x269 build_app/aes.o
                                         0x302 (size before relaxing)
@@ -763,19 +762,19 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
                                        0x1127 (size before relaxing)
  .debug_str     0x00000000000012e9      0x445 build_app/udp_broadcast.o
                                         0x80d (size before relaxing)
- .debug_str     0x000000000000172e      0x21b build_app/tcp_server.o
-                                        0x8b6 (size before relaxing)
- .debug_str     0x0000000000001949       0x73 build_app/main.o
+ .debug_str     0x000000000000172e      0x2fe build_app/tcp_server.o
+                                        0xa0a (size before relaxing)
+ .debug_str     0x0000000000001a2c       0x73 build_app/main.o
                                         0x40e (size before relaxing)
 
-.debug_loc      0x0000000000000000    0x1d0ed
+.debug_loc      0x0000000000000000    0x1deb4
  *(.debug_loc)
  .debug_loc     0x0000000000000000     0x2f66 build_app/aes.o
  .debug_loc     0x0000000000002f66     0x1176 build_app/aes_cbc128.o
  .debug_loc     0x00000000000040dc     0x1081 build_app/base64.o
  .debug_loc     0x000000000000515d    0x17042 build_app/cJSON.o
  .debug_loc     0x000000000001c19f      0x283 build_app/udp_broadcast.o
- .debug_loc     0x000000000001c422      0xccb build_app/tcp_server.o
+ .debug_loc     0x000000000001c422     0x1a92 build_app/tcp_server.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -795,15 +794,15 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/crtn.o
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000     0x49f0
+.debug_ranges   0x0000000000000000     0x4d20
  *(.debug_ranges)
  .debug_ranges  0x0000000000000000      0x9b0 build_app/aes.o
  .debug_ranges  0x00000000000009b0      0x190 build_app/aes_cbc128.o
  .debug_ranges  0x0000000000000b40       0xd0 build_app/base64.o
  .debug_ranges  0x0000000000000c10     0x3a70 build_app/cJSON.o
  .debug_ranges  0x0000000000004680      0x100 build_app/udp_broadcast.o
- .debug_ranges  0x0000000000004780      0x250 build_app/tcp_server.o
- .debug_ranges  0x00000000000049d0       0x20 build_app/main.o
+ .debug_ranges  0x0000000000004780      0x580 build_app/tcp_server.o
+ .debug_ranges  0x0000000000004d00       0x20 build_app/main.o
 
 .debug_macro
  *(.debug_macro)
