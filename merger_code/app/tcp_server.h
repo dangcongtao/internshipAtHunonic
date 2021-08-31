@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 typedef void (*hs_message_handler_t)(cJSON *jsRoot);
+
 typedef struct {
     hs_message_handler_t _handler;
     int                 _cmd_number;

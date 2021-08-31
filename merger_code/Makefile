@@ -6,7 +6,7 @@
 NAME_MODULE	= app
 # CXX			= g++
 # CC			= gcc
-CXX				= gcc
+CXX				= g++
 OBJ_DIR		= build_$(NAME_MODULE)
 
 OPTIMIZE_OPTION	=	-g -O3
@@ -39,6 +39,9 @@ LDLIBS	+=	-lpthread		\
 		-lm			\
 		-lcrypto \
 		-lssl \
+		-lpaho-mqtt3as\
+		-lpaho-mqttpp3\
+
 
 all: create $(OBJ_DIR)/$(NAME_MODULE)
 
