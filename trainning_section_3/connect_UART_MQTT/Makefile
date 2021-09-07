@@ -1,37 +1,28 @@
+#run UART after subcribe, then publish toppic name  My_Topic
+
+
+
+
 #all:
 #	g++ main.cpp -v -o test -lpthread -lcrypto -lssl -lpaho-mqtt3as -lpaho-mqttpp3
 #clean:
 #	rm *.cpp.*
 
-NAME_MODULE	= gateway_app
-CXX			= g++
-CC			= gcc
+
+#NAME_MODULE = publish
+NAME_MODULE		= UART
+# NAME_MODULE	= subcribe
+# CXX			= g++
+# CC			= gcc
+CXX				= g++
 OBJ_DIR		= build_$(NAME_MODULE)
 
 OPTIMIZE_OPTION	=	-g -O3
 WARNNING_OPTION	+=	#-Werror -Wno-missing-field-initializers -W
 
--include sources/app/Makefile.mk
-# -include sources/serial/Makefile.mk
-# -include sources/logger/Makefile.mk
-# -include sources/database/Makefile.mk
-# -include sources/devices/Makefile.mk
-# -include sources/networks/mqtt/Makefile.mk
-
--include sources/third_party/aes/Makefile.mk
--include sources/third_party/cJson/Makefile.mk
-
-# CC compiler option
-CFLAGS		+= -I/usr/local/include
-CFLAGS		+= -I/usr/include
-CFLAGS		+= -I../..
-CFLAGS	+=	$(OPTIMIZE_OPTION)	\
-		$(WARNNING_OPTION)	\
-		-Wall			\
-		-Winline		\
-		-pipe			\
-		-g			\
-
+# -include aes/Makefile.mk
+# -include cJson/Makefile.mk
+-include samples/Makefile.mk
 
 CXXFLAGS	+= -I/usr/local/include
 CXXFLAGS	+= -I/usr/include
@@ -40,7 +31,6 @@ CXXFLAGS    += -I../..
 # CXX compiler option
 CXXFLAGS	+=	$(OPTIMIZE_OPTION)	\
 		$(WARNNING_OPTION)	\
-		-std=c++11		\
 		-Wall			\
 		-Winline		\
 		-pipe			\
@@ -57,8 +47,9 @@ LDLIBS	+=	-lpthread		\
 		-lm			\
 		-lcrypto \
 		-lssl \
-		-lpaho-mqtt3as \
-		-lpaho-mqttpp3 \
+		-lpaho-mqtt3as\
+		-lpaho-mqttpp3\
+
 
 all: create $(OBJ_DIR)/$(NAME_MODULE)
 
@@ -69,11 +60,6 @@ create:
 $(OBJ_DIR)/%.o: %.cpp
 	@echo CXX $<
 	@$(CXX) -c -o $@ $< $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
-
-$(OBJ_DIR)/%.o: %.c
-	@echo CC $<
-	@$(CC) -c -o $@ $< $(CFLAGS) $(LDFLAGS) $(LDLIBS)
-
 
 $(OBJ_DIR)/$(NAME_MODULE): $(OBJ)
 	@echo ---------- START LINK PROJECT ----------
