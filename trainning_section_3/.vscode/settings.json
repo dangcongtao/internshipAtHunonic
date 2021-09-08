@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "mqttclient.h": "c",
+        "pubsub_opts.h": "c",
+        "string": "c",
+        "*.tcc": "cpp",
+        "bitset": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp",
+        "typeinfo": "cpp",
+        "future": "c",
+        "system_error": "c",
+        "signal.h": "c"
+    }
+}
